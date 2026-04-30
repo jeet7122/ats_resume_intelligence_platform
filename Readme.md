@@ -1,65 +1,78 @@
 # ATS Resume Intelligence Platform
 
-AI-powered Resume Optimization Platform that analyzes resumes against job descriptions, calculates ATS match scores, identifies missing skills, and generates recruiter-optimized resume improvements using LLMs and RAG pipelines.
-
-## Overview
-
-Hiring systems often reject strong candidates because resumes are not optimized for Applicant Tracking Systems (ATS).
-
-This platform helps candidates improve resume-job fit through:
-
-- Resume vs Job Description scoring
-- Missing keyword detection
-- Skill gap analysis
-- AI-powered bullet point rewriting
-- Resume summary optimization
-- RAG-based job intelligence retrieval
-- Structured recruiter-ready recommendations
+AI-powered Resume Optimization Platform that analyzes resumes against job descriptions, calculates ATS match scores, identifies missing skills, and generates recruiter-optimized resume improvements using LLMs and Retrieval-Augmented Generation (RAG).
 
 ---
 
-## Key Features
+## 🚀 Overview
 
-### Resume Scanner
-Upload a resume PDF + Job Description to receive:
+Many strong candidates get filtered out by Applicant Tracking Systems (ATS) because resumes are poorly optimized for keyword relevance, formatting, or role alignment.
+
+This platform helps candidates improve resume-job fit using AI + search systems.
+
+## Core Capabilities
+
+- Resume vs Job Description ATS scoring
+- Missing keyword detection
+- Skill gap analysis
+- AI-powered bullet point rewriting
+- Professional summary optimization
+- RAG-based hiring intelligence retrieval
+- Structured JSON outputs for frontend dashboards
+
+---
+
+#$ ✨ Features
+
+##$ 📄 Resume Scanner
+
+Upload a resume PDF + job description to receive:
 
 - ATS Match Score
-- Matched Skills
-- Missing Keywords
+- Matched Keywords
+- Missing Skills
 - Improvement Suggestions
 
-### AI Resume Optimizer
+---
 
-Uses Gemini AI + LangChain workflows to:
+### 🤖 AI Resume Optimizer
+
+Uses Gemini + LangChain workflows to:
 
 - Rewrite weak bullet points
 - Improve action verbs
-- Optimize summaries
-- Add relevant technical keywords
-- Improve ATS readability
+- Optimize professional summaries
+- Inject relevant technical keywords
+- Improve recruiter readability
 
-### RAG Job Intelligence Engine
+---
 
-Retrieves relevant:
+### 🧠 RAG Hiring Intelligence Engine
+
+Retrieves relevant context such as:
 
 - Similar job descriptions
 - Industry skill trends
 - Resume best practices
 - Role-specific keyword patterns
 
-### Structured Outputs
+---
 
-Returns JSON responses for frontend dashboards and analytics systems.
+### 📊 Structured Outputs
+
+Returns clean JSON responses for:
+
+- React dashboards
+- Analytics systems
+- Resume builder UIs
+- Career coaching tools
 
 ---
 
-## Tech Stack
+## 🛠 Tech Stack
 
 ### Backend
 
-- Java
-- Spring Boot
-- Spring AI
 - Python
 - FastAPI
 
@@ -70,79 +83,116 @@ Returns JSON responses for frontend dashboards and analytics systems.
 - Prompt Engineering
 - RAG Pipelines
 - ChromaDB
-- Embeddings
+- Vector Embeddings
 
-### Database
+### Data Layer
 
-- PostgreSQL
+- Chroma Vector Database
+- LocalFileStore (Parent Document Storage)
 
-### DevOps / Tools
+### Tools / DevOps
 
-- Docker
-- Postman
 - Git
+- Postman
+- Docker (planned)
 
 ---
 
-## System Architecture
+## 🏗 System Architecture
 
 ```text
-Frontend / Dashboard
-        |
-        v
-Spring Boot API Gateway
-        |
- -------------------------
- |                       |
-FastAPI Scanner Service   AI Optimization Service
- |                       |
-Keyword Engine        Gemini + LangChain
- |
-ChromaDB RAG Layer
- |
-PostgreSQL
+User Uploads Resume + JD
+          |
+          v
+      FastAPI Backend
+          |
+  ---------------------
+  |                   |
+  v                   v
+ATS Scanner      AI Optimizer
+(Keyword Engine) (Gemini LLM)
+  |                   |
+  -----------|---------
+             v
+      RAG Retriever
+   (Chroma + Parent Docs)
+            |
+            v
+    Hiring Intelligence Data
 ```
-
 ## API Endpoints
-### Resume Scan
+
+### Analyze Resume (Main Endpoint)
 ```http
-POST /scan
+POST /analyze
 ```
 
 ### Body
 ```json
-Form Data:
-
-resume (PDF)
-jd (Job Description)
-```
-
-### AI Optimization
-
-```http
-POST /optimize
-```
-
-### Body
-```json
-{
-  "resume_text": "...",
-  "jd": "..."
-}
+Form Data
+  resume: PDF_File,
+  jd: Text
 ```
 
 ### Example Output
 
 ```json
 {
-  "score": 87,
-  "matched_keywords": ["Java", "Spring Boot", "SQL"],
-  "missing_keywords": ["Docker", "AWS"],
-  "suggestions": [
-    "Add Docker experience",
-    "Mention AWS deployment work"
-  ]
+  "success": true,
+  "resume_filename": "resume.pdf",
+  "scan_result": {
+    "score": 92,
+    "matched_keywords": [
+      "java",
+      "spring boot",
+      "python"
+    ],
+    "missing_keywords": [
+      "react"
+    ],
+    "suggestions": [
+      "Add React experience"
+    ]
+  },
+  "optimization_result": {
+    "summary": "Backend engineer specializing in scalable Java systems...",
+    "missing_keywords": [
+      "React",
+      "PostgreSQL"
+    ],
+    "improved_bullets": [
+      "...",
+      "..."
+    ],
+    "suggestions": [
+      "...",
+      "..."
+    ]
+  }
 }
+```
+
+## 🧠 How It Works
+Resume PDF
+→ Text Extraction
+→ ATS Keyword Scoring
+→ Semantic Retrieval (RAG)
+→ Gemini Resume Optimization
+→ Structured Output
+
+## 📁 Project Structure
+```
+app/
+├── main.py
+├── parser.py
+├── scorer.py
+├── skills.py
+├── agent.py
+├── prompts.py
+└── rag/
+    ├── ingest.py
+    ├── vectorstore.py
+    └── retriever.py
 ```
 
 ## Future Roadmap
