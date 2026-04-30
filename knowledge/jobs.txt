@@ -1,0 +1,3 @@
+Java Backend Engineer requires Spring Boot, REST APIs, Kafka, AWS, Docker.
+Senior Full Stack Engineer requires React, Node.js, PostgreSQL.
+Microservices Engineer requires Java, Kubernetes, CI/CD, cloud deployment.
